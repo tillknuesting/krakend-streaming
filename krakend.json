@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "plugin": {
+    "pattern": ".so",
+    "folder": "./krakend-server-plugin-streaming/"
+  },
+  "port": 8080,
+  "endpoints": [
+    {
+      "endpoint": "/sse/{id}",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/events-stream/{id}",
+          "host": [
+            "http://localhost:9081"
+          ],
+          "encoding": "no-op"
+        }
+      ]
+    }
+  ],
+  "extra_config": {
+    "plugin/http-server": {
+      "name": ["krakend-server-plugin-streaming"],
+      "krakend-server-plugin-streaming": {
+        "endpoint": "/sse/{id}",
+        "backend_url_pattern": "/events-stream/{id}",
+        "backend_host": "http://localhost:9081"
+      }
+    }
+  }
+}
