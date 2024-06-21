@@ -19,10 +19,10 @@ func main() {
 }
 
 func generateMessages() {
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 100; i++ {
 		message := fmt.Sprintf("data: Hello, SSE! (Message %d)\n\n", i)
 		messageChannel <- message
-		sleepDuration := time.Duration(rand.Intn(250)+550) * time.Millisecond
+		sleepDuration := time.Duration(rand.Intn(250)+950) * time.Millisecond
 		time.Sleep(sleepDuration)
 	}
 	messageChannel <- "event: done\ndata: Server is done sending events.\n\n"
